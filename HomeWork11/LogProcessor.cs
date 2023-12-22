@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using static HomeWork11.LogEntry;
+﻿using static HomeWork11.LogEntry;
 
 namespace HomeWork11
 {
@@ -27,8 +26,8 @@ namespace HomeWork11
 
         public void FilterByLevel(LogLevel level)
         {
-            var number = logs.Where(l => l.Level == level);
-            foreach (var log in number)
+            var result = from l in logs where l.Level == level select l;
+            foreach (var log in result)
             {
                 if (level == LogLevel.Info)
                 {
@@ -43,22 +42,24 @@ namespace HomeWork11
             }
         }
 
-        public void CountErrors()
+        public int CountErrors()
         {
-            var number = logs.Where(l => l.Level == LogLevel.Error);
             int count = 0;
-            foreach (var log in number)
+            var result = from l in logs where l.Level == LogLevel.Error select l;
+            foreach (var log in result)
             {
                 count++;
             }
-            Console.WriteLine($"Количество ошибок в логах: {count}");
+            return count;
+
         }
 
         public void FindRecentLogs(DateTime since)
         {
-            var number = logs.Where(t => t.Timestamp > since);
+            var result = from l in logs where l.Timestamp > since select l;
             Console.WriteLine($"Логи после {since}:");
-            foreach (var log in number)
+            var finalResult = from l in result orderby l.Timestamp ascending select l;
+            foreach (var log in finalResult)
             {
                 Console.WriteLine($"{log.Timestamp}, {log.Level}, {log.Message}");
             }
@@ -66,10 +67,11 @@ namespace HomeWork11
 
         public void GroupByLevel()
         {
-            var grouped = logs.GroupBy(l => l.Level == LogLevel.Error && l.Level == LogLevel.Warning && l.Level == LogLevel.Info);
             int count1 = 0;
             int count2 = 0;
             int count3 = 0;
+            var grouped = logs.GroupBy(l => l.Level);
+
             foreach (var group in grouped)
             {
                 foreach (var log in group)
@@ -91,21 +93,21 @@ namespace HomeWork11
                   $"Группа 3 (Ошибки) содержит {count1} логов");
         }
 
-        public void FindTopLogs(string keyword)
+        public void FindTopLogs(string keyword, int count)
         {
-            int count = 0;
-            var logsFound = logs.Where(l => l.Level.ToString().ToLower() == keyword.ToLower()).OrderByDescending(l => l.Timestamp);
-
-            foreach (var log in logsFound)
+            var logsFound = from l in logs
+                            where l.Message.ToString().ToLower().Contains(keyword.ToLower())
+                            select l;
+            var result = from l in logsFound.Take(count)
+                         orderby l.Timestamp ascending
+                         select l;
+            foreach (var log in result)
             {
                 Console.WriteLine($"{log.Timestamp}, {log.Level}, {log.Message}");
-                count++;
             }
-            Console.WriteLine($"Количество логов {keyword} составляет: {count}");
-
         }
 
-        public void FindError()
+        public void CheckErrors()
         {
             foreach (var log in logs)
             {
