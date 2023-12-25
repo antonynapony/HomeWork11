@@ -5,19 +5,19 @@ class Program
     public static void Main(string[] args)
     {
         LogProcessor logs = new LogProcessor();
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "Authentication log", Level = LogEntry.LogLevel.Error });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "Server log", Level = LogEntry.LogLevel.Info });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "Server log", Level = LogEntry.LogLevel.Warning });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 17), Message = "Authorization log", Level = LogEntry.LogLevel.Info });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "System log", Level = LogEntry.LogLevel.Warning });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 19), Message = "Server log", Level = LogEntry.LogLevel.Error });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "System log", Level = LogEntry.LogLevel.Info });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 12), Message = "Authentication log", Level = LogEntry.LogLevel.Warning });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 12), Message = "System log", Level = LogEntry.LogLevel.Error });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 20), Message = "Authentication log", Level = LogEntry.LogLevel.Error });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 20), Message = "System log", Level = LogEntry.LogLevel.Warning });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 19), Message = "Authorization log", Level = LogEntry.LogLevel.Error });
-        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 17), Message = "Authorization log", Level = LogEntry.LogLevel.Error });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "Authentication log", Level = LogLevel.Error });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "Server log", Level = LogLevel.Info });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "Server log", Level = LogLevel.Warning });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 17), Message = "Authorization log", Level = LogLevel.Info });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "System log", Level = LogLevel.Warning });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 19), Message = "Server log", Level = LogLevel.Error });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 18), Message = "System log", Level = LogLevel.Info });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 12), Message = "Authentication log", Level = LogLevel.Warning });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 12), Message = "System log", Level = LogLevel.Error });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 20), Message = "Authentication log", Level = LogLevel.Error });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 20), Message = "System log", Level = LogLevel.Warning });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 19), Message = "Authorization log", Level = LogLevel.Error });
+        logs.AddLog(new LogEntry() { Timestamp = new DateTime(2023, 12, 17), Message = "Authorization log", Level = LogLevel.Error });
 
         logs.FilterByLevel(LogLevel.Info);
         logs.FilterByLevel(LogLevel.Warning);

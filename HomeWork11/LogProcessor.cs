@@ -1,4 +1,5 @@
-﻿using static HomeWork11.LogEntry;
+﻿using System.Text;
+using static HomeWork11.LogEntry;
 
 namespace HomeWork11
 {
@@ -44,13 +45,8 @@ namespace HomeWork11
 
         public int CountErrors()
         {
-            int count = 0;
             var result = from l in logs where l.Level == LogLevel.Error select l;
-            foreach (var log in result)
-            {
-                count++;
-            }
-            return count;
+            return result.Count();
 
         }
 
@@ -67,6 +63,7 @@ namespace HomeWork11
 
         public void GroupByLevel()
         {
+
             int count1 = 0;
             int count2 = 0;
             int count3 = 0;
@@ -99,7 +96,7 @@ namespace HomeWork11
                             where l.Message.ToString().ToLower().Contains(keyword.ToLower())
                             select l;
             var result = from l in logsFound.Take(count)
-                         orderby l.Timestamp ascending
+                         orderby l.Timestamp descending
                          select l;
             foreach (var log in result)
             {
